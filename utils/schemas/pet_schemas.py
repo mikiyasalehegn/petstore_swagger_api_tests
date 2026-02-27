@@ -8,7 +8,15 @@ get_pet_schema = {
     "required": ["id", "name", "status"]
 }
 
-
+error_message = {
+  "type": "object",
+  "properties": {
+      "code": "integer",
+      "type": "string",
+      "message": "string"
+  },
+  "required": ["code", "message"]
+}
 
 
 
