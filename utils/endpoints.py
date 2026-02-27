@@ -3,7 +3,7 @@ class PetEndpoints:
     UPDATE = "/pet"
     GET_BY_ID = "/pet/{}"
     DELETE = "/pet/{}"
-    FIND_BY_STATUS = "/pet/findByStatus"
+    FIND_BY_STATUS = lambda entity: f"findByStatus?status={entity}"
 
 
 class UserEndpoints:
