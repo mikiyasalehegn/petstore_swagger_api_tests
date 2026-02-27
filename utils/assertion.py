@@ -16,3 +16,6 @@ def assert_pet_statuses(response, expected_statuses):
     statuses = [pet.get("status") for pet in response.json()]
     assert all(stat == expected_statuses for stat in statuses), f"Expected {expected_statuses}, got {statuses}"
 
+def assert_error_messages(response, expected_messages):
+    assert response.json.get("message") == expected_messages, \
+        f"Expected {expected_messages}, got {response.json.get('message')}"
