@@ -1,10 +1,13 @@
 import requests
-from utils.config import BASE_URL
+from utils.config import BASE_URL,API_KEY
 
 class APIClient:
     def __init__(self):
         self.base_url = BASE_URL
         self.session = requests.Session()
+        self.session.headers.update({
+            "api-key": API_KEY,
+        })
 
     def get(self, endpoint, **kwargs):
         return self.session.get(self.base_url + endpoint, **kwargs)
