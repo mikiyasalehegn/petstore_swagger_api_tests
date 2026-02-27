@@ -2,7 +2,6 @@ from utils.endpoints import PetEndpoints
 from utils.assertion import assert_status_code, assert_data_schema, assert_key, assert_pet_statuses, assert_error_messages
 from utils.schemas import pet_schemas
 from data.test_data import PetsData
-from utils.api_client import APIClient
 
 
 def test_create_pet_with_valid_data(pet_api):
