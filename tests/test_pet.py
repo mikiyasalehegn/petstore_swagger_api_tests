@@ -1,4 +1,3 @@
-from conftest import api_client
 from utils.endpoints import PetEndpoints
 from utils.assertion import assert_status_code, assert_data_schema, assert_key, assert_pet_statuses, assert_error_messages
 from utils.schemas import pet_schemas
@@ -9,6 +8,21 @@ def test_create_pet_with_valid_data(pet_api):
     response = pet_api.create_pet(PetsData.CREATE_PET_WITH_VALID_DATA)
     assert_status_code(response, 201)
     assert_data_schema(response, pet_schemas.create_pet_schema)
+
+def test_create_pet_with_empty_data(pet_api):
+    response = pet_api.create_pet(PetsData.CREATE_PET_WITH_EMPTY_DATA)
+    assert_status_code(response, 400)
+    assert_error_messages(response, "Id should be integer")
+
+def test_create_pet_with_invalid_api_key(pet_api):
+    invalid_api_key = "wrong key"
+    response = pet_api.create_pet(PetsData.CREATE_PET_WITH_VALID_DATA, headers=invalid_api_key)
+    assert_status_code(response, 404)
+
+def test_create_pet_with_invalid_id(pet_api):
+    response = pet_api.create_pet(PetsData.CREATE_PET_WITH_INVALID_ID)
+    assert_status_code(response, 400)
+
 
 def test_get_pet_by_correct_id(pet_api):
     response = pet_api.get_pet(10)

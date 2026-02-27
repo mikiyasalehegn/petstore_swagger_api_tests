@@ -25,5 +25,13 @@ class PetsData:
       ],
       "status": "available"
     }
+    CREATE_PET_WITH_EMPTY_DATA = {}
+    CREATE_PET_WITH_INVALID_ID = {
+      "id": "345tdfsdvdsf",
+      "name": "Mkkk",
+      "photoUrls": [],
+      "tags": [],
+      "status": "available"
+    }
 
 
