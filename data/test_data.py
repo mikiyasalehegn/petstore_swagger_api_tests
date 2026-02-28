@@ -33,5 +33,17 @@ class PetsData:
       "tags": [],
       "status": "available"
     }
+    CREATE_PET_WITH_INVALID_STATUS = {
+      "name": "Status",
+      "photoUrls": [],
+      "tags": [],
+      "status": INVALID_PET_STATUS
+    }
+    CREATE_PET_WITHOUT_NAME = {
+      "category": {},
+      "photoUrls": [],
+      "tags": [],
+      "status": INVALID_PET_STATUS
+    }
 
 
