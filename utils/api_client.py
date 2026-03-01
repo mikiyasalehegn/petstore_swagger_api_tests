@@ -9,6 +9,9 @@ class APIClient:
             "api-key": API_KEY,
         })
 
+    def api_key(self, value):
+        self.session.headers.update({value})
+
     def get(self, endpoint, **kwargs):
         return self.session.get(self.base_url + endpoint, **kwargs)
 

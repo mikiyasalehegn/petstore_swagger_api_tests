@@ -1,4 +1,20 @@
+import random
+import string
+
 class PetsData:
+
+    @staticmethod
+    def update_keys( data, key, value):
+        data[key] = value
+        return data
+
+    @staticmethod
+    def random_string(length):
+        # Generate random word (nonsense)
+        random_word = ''.join(random.choices(string.ascii_letters, k=length))
+        return random_word
+
+
     INVALID_ID = 'invalid id'
     INVALID_PET_STATUS = 'invalid pet status'
     AVAILABLE_PETS = "available"
@@ -33,5 +49,39 @@ class PetsData:
       "tags": [],
       "status": "available"
     }
+    CREATE_PET_WITH_INVALID_STATUS = {
+      "name": "Status",
+      "photoUrls": [],
+      "tags": [],
+      "status": INVALID_PET_STATUS
+    }
+    CREATE_PET_WITHOUT_NAME = {
+      "category": {},
+      "photoUrls": [],
+      "tags": [],
+      "status": INVALID_PET_STATUS
+    }
+
+    Update_PET_WITH_VALID_DATA= {
+      "id": None,
+      "category": {
+        "id": 0,
+        "name": "string"
+      },
+      "name": random_string(8),
+      "photoUrls": [
+        "string"
+      ],
+      "tags": [
+        {
+          "id": 0,
+          "name": "string"
+        }
+      ],
+      "status": "available"
+    }
+
+
+
 
 
