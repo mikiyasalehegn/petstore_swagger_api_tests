@@ -64,6 +64,16 @@ def test_get_pets_with_invalid_status(pet_api):
     assert_data_schema(response, pet_schemas.error_message)
     assert_error_messages(response, "Invalid pet status")
 
+def test_update_pet_with_valid_data(pet_api):
+    get_response = pet_api.get_pet(10)
+    assert_status_code(get_response, 200)
+    assert_data_schema(get_response, pet_schemas.get_pet_schema)
+    pet_name = get_response.json().get("name")
+    payload = PetsData.update_keys(PetsData.Update_PET_WITH_VALID_DATA, key="id", value=10)
+    update_response = pet_api.update_pet(payload)
+    assert_status_code(update_response, 200)
+    assert update_response.json().get("name") != pet_name
+
 
 
 

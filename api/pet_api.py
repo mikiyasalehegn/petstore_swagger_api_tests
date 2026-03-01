@@ -11,5 +11,5 @@ class PetApi:
     def delete_pet(self, entity):
         return self.api_client.delete(f"/pet/{entity}")
 
-    def update_pet(self, pet_id, payload):
-        return self.api_client.put(f"/pet/{pet_id}", json=payload)
+    def update_pet(self, payload):
+        return self.api_client.put("/pet", json=payload)
