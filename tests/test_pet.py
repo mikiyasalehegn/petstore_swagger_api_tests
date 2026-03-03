@@ -78,7 +78,7 @@ def test_update_pet_with_valid_data(pet_api):
 
 def test_update_pet_with_invalid_data(pet_api):
     response = pet_api.update_pet(PetsData.Update_PET_WITH_INVALID_DATA)
-    assert_status_code(response, 200)
+    assert_status_code(response, 404)
 
 def test_update_pet_without_id(pet_api):
     response = pet_api.update_pet(PetsData.UPDATE_PET_WITHOUT_ID)
@@ -87,6 +87,7 @@ def test_update_pet_without_id(pet_api):
 def test_update_pet_with_invalid_api_key(pet_api):
     response = pet_api.update_pet(PetsData.Update_PET_WITH_VALID_DATA, api_key=PetsData.INVALID_API_KEY)
     assert_status_code(response, 404)
+
 
 
 

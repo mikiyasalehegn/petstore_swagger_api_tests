@@ -1,19 +1,15 @@
 import random
 import string
+import datetime
+
 
 class PetsData:
-
-    @staticmethod
-    def update_keys( data, key, value):
-        data[key] = value
-        return data
 
     @staticmethod
     def random_string(length):
         # Generate random word (nonsense)
         random_word = ''.join(random.choices(string.ascii_letters, k=length))
         return random_word
-
 
     INVALID_ID = 'invalid id'
     INVALID_API_KEY = 'invalid api key'
@@ -121,5 +117,23 @@ class PetsData:
 
 
 
+class OrderPetsData:
 
+    ORDER_PET_WITH_VALID_DATA = {
+    "id": None,
+    "petId": None,
+    "quantity": 0,
+    "shipDate": str(datetime.date.today()),
+    "status": "placed",
+    "complete": True
+}
+
+    ORDER_PET_WITH_INVALID_DATA = {
+        "id": "7384RTKJHQCD",
+        "petId": "AD87T134R",
+        "quantity": True,
+        "shipDate": False,
+        "status": 2345,
+        "complete": "weg6"
+    }
 
