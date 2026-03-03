@@ -1,12 +1,12 @@
 from utils.assertion import assert_data_schema, assert_status_code, assert_error_messages
 from utils.schemas import order_schemas
 from data.test_data import OrderPetsData
-from utils.utility_functions import update_keys
+from utils.utility_functions import update_keys, get_random_existing_id
 
 def test_get_store_inventory(order_api):
     response = order_api.get_store_inventory()
     assert_status_code(response, 200)
-    assert_data_schema(response, order_schemas.get_store_inventory_schema)
+    assert_data_schema(response, order_schemas.GET_STORE_INVENTORY_SCHEMA)
 
 def test_get_store_inventory_with_invalid_api_key(order_api):
     response = order_api.get_store_inventory(api_key="invalid_api_key")
@@ -28,8 +28,9 @@ def test_place_pet_order_with_invalid_data(order_api):
     response = order_api.place_pet_order(payload=OrderPetsData.ORDER_PET_WITH_INVALID_DATA)
     assert_status_code(response, 400)
 
-def test_place_pet_order_with_invalid_api_key(order_api):
-    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=1, id=2)
+def test_place_pet_order_with_invalid_api_key(order_api, pet_api):
+    pet_id = get_random_existing_id(pet_api.get_pet, 100)
+    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=pet_id)
     response = order_api.place_pet_order(payload, api_key="invalid_api_key")
     assert_status_code(response, 404)
     assert_error_messages(response, "invalid_api_key")
@@ -38,8 +39,9 @@ def test_place_pet_order_with_empty_payload(order_api):
     response = order_api.place_pet_order({})
     assert_status_code(response, 400)
 
-def test_get_order(order_api):
-    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=1, id=2)
+def test_get_order(order_api ,pet_api):
+    pet_id = get_random_existing_id(pet_api.get_pet, 100)
+    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=pet_id)
     create_order_response = order_api.place_pet_order(payload)
     assert_status_code(create_order_response, 200)
     order_id = create_order_response.json()["id"]
@@ -48,8 +50,9 @@ def test_get_order(order_api):
     assert response.json().get("id") == order_id
     assert_data_schema(response, order_schemas.PLACE_ORDER_PET_SCHEMA)
 
-def test_get_order_with_invalid_api_key(order_api):
-    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=1, id=2)
+def test_get_order_with_invalid_api_key(order_api, pet_api):
+    pet_id = get_random_existing_id(pet_api.get_pet, 100)
+    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=pet_id)
     create_order_response = order_api.place_pet_order(payload)
     assert_status_code(create_order_response, 200)
     order_id = create_order_response.json()["id"]
@@ -57,12 +60,13 @@ def test_get_order_with_invalid_api_key(order_api):
     assert_status_code(response, 404)
 
 def test_get_order_with_invalid_order_id(order_api):
-    response = order_api.get_pet_order("384768rbnsdc")
+    response = order_api.get_pet_order(order_id=OrderPetsData.INVALID_ID)
     assert_status_code(response, 404)
     assert_error_messages(response, "invalid order id")
 
-def test_delete_order(order_api):
-    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=1, id=2)
+def test_delete_order(order_api, pet_api):
+    pet_id = get_random_existing_id(pet_api.get_pet, 100)
+    payload = update_keys(OrderPetsData.ORDER_PET_WITH_VALID_DATA, petId=pet_id)
     create_order_response = order_api.place_pet_order(payload)
     assert_status_code(create_order_response, 200)
     order_id = create_order_response.json()["id"]
@@ -70,11 +74,12 @@ def test_delete_order(order_api):
     assert_status_code(response, 200)
 
 def test_delete_order_with_invalid_order_id(order_api):
-    response = order_api.delete_pet_order("384768rbnsdc")
+    response = order_api.delete_pet_order(order_id=OrderPetsData.INVALID_ID)
     assert_status_code(response, 404)
     assert_error_messages(response, "invalid order id")
 
 def test_delete_order_with_invalid_api_key(order_api):
-    response = order_api.delete_pet_order(order_id=2, api_key="invalid_api_key")
+    order_id = get_random_existing_id(order_api.get_pet_order, 100)
+    response = order_api.delete_pet_order(order_id=order_id, api_key="invalid_api_key")
     assert_status_code(response, 404)
     assert_error_messages(response, "invalid api key")

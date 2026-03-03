@@ -1,16 +1,8 @@
-import random
-import string
+from utils.utility_functions import random_string
 import datetime
 
 
 class PetsData:
-
-    @staticmethod
-    def random_string(length):
-        # Generate random word (nonsense)
-        random_word = ''.join(random.choices(string.ascii_letters, k=length))
-        return random_word
-
     INVALID_ID = 'invalid id'
     INVALID_API_KEY = 'invalid api key'
     INVALID_PET_STATUS = 'invalid pet status'
@@ -118,7 +110,7 @@ class PetsData:
 
 
 class OrderPetsData:
-
+    INVALID_ID = "fhgjg"
     ORDER_PET_WITH_VALID_DATA = {
     "id": None,
     "petId": None,

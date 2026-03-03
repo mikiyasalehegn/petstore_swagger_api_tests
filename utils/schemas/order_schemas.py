@@ -1,4 +1,4 @@
-get_store_inventory_schema = {
+GET_STORE_INVENTORY_SCHEMA = {
     "type": "object",
     "properties": {
         "sold": {"type": "integer"},
@@ -7,7 +7,7 @@ get_store_inventory_schema = {
         "pending": {"type": "integer"},
         "peric": {"type": "integer"},
     },
-    "required": ["sold", "available", "pending", "peric"]
+    "required": ["sold", "available", "pending"]
 }
 
 PLACE_ORDER_PET_SCHEMA = {
