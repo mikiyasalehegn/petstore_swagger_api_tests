@@ -16,6 +16,7 @@ class PetsData:
 
 
     INVALID_ID = 'invalid id'
+    INVALID_API_KEY = 'invalid api key'
     INVALID_PET_STATUS = 'invalid pet status'
     AVAILABLE_PETS = "available"
     PENDING_PETS = "pending"
@@ -64,6 +65,43 @@ class PetsData:
 
     Update_PET_WITH_VALID_DATA= {
       "id": None,
+      "category": {
+        "id": 0,
+        "name": "string"
+      },
+      "name": random_string(8),
+      "photoUrls": [
+        "string"
+      ],
+      "tags": [
+        {
+          "id": 0,
+          "name": "string"
+        }
+      ],
+      "status": "available"
+    }
+
+    Update_PET_WITH_INVALID_DATA = {
+        "id": "asdfv,",
+        "category": {
+            "id": "hsdvck-=21340",
+            "name": 65756
+        },
+        "name": "jscvjm",
+        "photoUrls": [
+            "string"
+        ],
+        "tags": [
+            {
+                "id": 0,
+                "name": "string"
+            }
+        ],
+        "status": 2345476
+    }
+
+    UPDATE_PET_WITHOUT_ID = {
       "category": {
         "id": 0,
         "name": "string"

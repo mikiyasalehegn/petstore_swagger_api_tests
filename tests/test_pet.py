@@ -15,8 +15,7 @@ def test_create_pet_with_empty_data(pet_api):
     assert_error_messages(response, "Id should be integer")
 
 def test_create_pet_with_invalid_api_key(pet_api):
-    invalid_api_key = "wrong key"
-    response = pet_api.create_pet(PetsData.CREATE_PET_WITH_VALID_DATA, headers=invalid_api_key)
+    response = pet_api.create_pet(PetsData.CREATE_PET_WITH_VALID_DATA, api_key=PetsData.INVALID_API_KEY)
     assert_status_code(response, 404)
 
 def test_create_pet_with_invalid_id(pet_api):
@@ -32,7 +31,6 @@ def test_create_pet_without_name(pet_api):
     response = pet_api.create_pet(PetsData.CREATE_PET_WITHOUT_NAME)
     assert_status_code(response, 400)
     assert_error_messages(response, "Name is required")
-
 
 def test_get_pet_by_correct_id(pet_api):
     response = pet_api.get_pet(10)
@@ -64,6 +62,10 @@ def test_get_pets_with_invalid_status(pet_api):
     assert_data_schema(response, pet_schemas.error_message)
     assert_error_messages(response, "Invalid pet status")
 
+def test_get_pet_with_invalid_api_key(pet_api):
+    response = pet_api.get_pet(10, api_key=PetsData.INVALID_API_KEY)
+    assert_status_code(response, 404)
+
 def test_update_pet_with_valid_data(pet_api):
     get_response = pet_api.get_pet(10)
     assert_status_code(get_response, 200)
@@ -73,6 +75,18 @@ def test_update_pet_with_valid_data(pet_api):
     update_response = pet_api.update_pet(payload)
     assert_status_code(update_response, 200)
     assert update_response.json().get("name") != pet_name
+
+def test_update_pet_with_invalid_data(pet_api):
+    response = pet_api.update_pet(PetsData.Update_PET_WITH_INVALID_DATA)
+    assert_status_code(response, 200)
+
+def test_update_pet_without_id(pet_api):
+    response = pet_api.update_pet(PetsData.UPDATE_PET_WITHOUT_ID)
+    assert_status_code(response, 404)
+
+def test_update_pet_with_invalid_api_key(pet_api):
+    response = pet_api.update_pet(PetsData.Update_PET_WITH_VALID_DATA, api_key=PetsData.INVALID_API_KEY)
+    assert_status_code(response, 404)
 
 
 
