@@ -31,5 +31,3 @@ create_pet_schema = {
     "required": ["id", "name", "photoUrls", "status"]
 }
 
-
-

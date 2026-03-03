@@ -1,4 +1,5 @@
 import pytest
+from api.order_api import OrderApi
 from utils.api_client import APIClient
 from api.pet_api import PetApi
 
@@ -6,6 +7,10 @@ from api.pet_api import PetApi
 @pytest.fixture(scope="session")
 def api_client():
     return APIClient()
+
+@pytest.fixture(scope="session")
+def order_api(api_client):
+    return OrderApi(api_client)
 
 @pytest.fixture(scope="session")
 def pet_api(api_client):
