@@ -60,7 +60,9 @@ def test_update_user_with_valid_data(user_api):
     get_user_response = user_api.get_user(user_name=new_username)
     assert_status_code(get_user_response, 200)
     assert_data_schema(get_user_response, GET_USER_SCHEMA)
-    UsrData.CREATE_USER_WITH_VALID_DATA["username"] = new_username
+    if response.status_code == 200:
+        UsrData.CREATE_USER_WITH_VALID_DATA["username"] = new_username
+        UsrData.CREATE_USER_WITH_VALID_DATA["password"] = response.json()["password"]
     UsrData.CREATE_USER_WITH_VALID_DATA["password"] = response.json()["password"]
     assert get_user_response.json()["username"] == update_user_data["username"]
     assert get_user_response.json()["firstName"] == update_user_data["firstName"]
@@ -72,6 +74,8 @@ def test_update_user_with_valid_data(user_api):
 def test_update_user_invalid_data(user_api):
     username = UsrData.CREATE_USER_WITH_VALID_DATA["username"]
     response = user_api.update_user(user_name=username, payload=UsrData.CREATE_USER_WITH_INVALID_DATA)
+    if response.status_code == 200:
+        UsrData.CREATE_USER_WITH_VALID_DATA["username"] = response.json()["username"]
     assert_status_code(response, 400)
 
 def test_update_user_id(user_api):
@@ -116,6 +120,12 @@ def test_login_user_with_invalid_password_and_username(user_api):
     response = user_api.login(username=username, password=password)
     assert_status_code(response, 400)
     assert_error_messages(response, "Wrong password and username")
+
+def test_login_with_invalid_api_key(user_api):
+    username = UsrData.CREATE_USER_WITH_VALID_DATA["username"]
+    response = user_api.login(username=username, api_key="invalid api key")
+    assert_status_code(response, 401)
+    assert_error_messages(response, "Invalid api key")
 
 
 
