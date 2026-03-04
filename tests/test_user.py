@@ -1,7 +1,5 @@
-from utils.schemas.user_schema import GET_USER_SCHEMA
-from utils.assertion import assert_data_schema, assert_status_code, assert_error_messages
-from data.test_data import UsrData
-from utils.utility_functions import update_keys
+from utils import GET_USER_SCHEMA, assert_data_schema, assert_status_code, assert_error_messages, update_keys
+from data import UsrData
 
 
 def test_create_users_with_list_and_valid_data(user_api):

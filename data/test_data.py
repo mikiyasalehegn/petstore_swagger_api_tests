@@ -4,6 +4,7 @@ import datetime
 
 
 class PetsData:
+    FIND_BY_STATUS = lambda entity: f"findByStatus?status={entity}"
     INVALID_ID = 'invalid id'
     INVALID_API_KEY = 'invalid api key'
     INVALID_PET_STATUS = 'invalid pet status'

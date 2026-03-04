@@ -1,8 +1,8 @@
 import pytest
-from api.order_api import OrderApi
-from utils.api_client import APIClient
-from api.pet_api import PetApi
-from api.user_api import UserApi
+from api import OrderApi
+from utils import APIClient
+from api import PetApi
+from api import UserApi
 
 
 @pytest.fixture(scope="session")
