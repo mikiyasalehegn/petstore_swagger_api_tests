@@ -129,3 +129,25 @@ class OrderPetsData:
         "complete": "weg6"
     }
 
+class UsrData:
+    CREATE_USERS_WITH_VALID_DATA = [
+      {
+        "username": "User01",
+        "firstName": "User",
+        "lastName": "One",
+        "email": "user01@gmail.com",
+        "password": "123456",
+        "phone": "0489732567",
+        "userStatus": 0
+      },
+      {
+        "username": "User02",
+        "firstName": "User2",
+        "lastName": "Two",
+        "email": "user02@gmai.com",
+        "password": "7654321",
+        "phone": "03789469235",
+        "userStatus": 1
+      }
+    ]
+
