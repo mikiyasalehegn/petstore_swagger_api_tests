@@ -11,8 +11,8 @@ class UserApi:
     def get_user(self, user_name, api_key=None):
         return self.api_client.get(f"/user/{user_name}", api_key=api_key)
 
-    def update_user(self, user_name, api_key=None):
-        return self.api_client.put(f"/user/{user_name}", api_key=api_key)
+    def update_user(self, user_name, payload, api_key=None):
+        return self.api_client.put(f"/user/{user_name}", json=payload, api_key=api_key)
 
     def delete_user(self, user_name, api_key=None):
         return self.api_client.delete(f"/user/{user_name}", api_key=api_key)

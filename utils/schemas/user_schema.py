@@ -3,14 +3,14 @@ GET_USER_SCHEMA = {
     "properties": {
         "id": {"type": "integer"},
         "username": {"type": "string"},
-        "first_name": {"type": "string"},
-        "last_name": {"type": "string"},
+        "firstName": {"type": "string"},
+        "lastName": {"type": "string"},
         "email": {"type": "string"},
         "password": {"type": "string"},
         "phone": {"type": "string"},
-        "userstatus": {"type": "integer"},
+        "userStatus": {"type": "integer"},
     },
-    "required": ["id", "username", "first_name", "last_name", "email", "phone", "userStatus"]
+    "required": ["id", "username", "firstName", "lastName", "email", "phone", "userStatus"]
 }
 
 
