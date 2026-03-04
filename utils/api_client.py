@@ -31,4 +31,3 @@ class APIClient:
     def delete(self, endpoint, api_key=None, **kwargs):
         headers = self._prepare_headers(api_key, kwargs.pop("headers", None))
         return self.session.delete(self.base_url + endpoint,headers=headers, **kwargs)
-

@@ -23,4 +23,3 @@ PLACE_ORDER_PET_SCHEMA = {
         "required": ["id", "petId", "quantity", "shipDate", "status"]
 
 }
-

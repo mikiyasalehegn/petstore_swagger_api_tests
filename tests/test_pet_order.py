@@ -1,12 +1,11 @@
-from utils.assertion import assert_data_schema, assert_status_code, assert_error_messages
-from utils.schemas import order_schemas
-from data.test_data import OrderPetsData
-from utils.utility_functions import update_keys, get_random_existing_id
+from utils import (assert_data_schema, assert_status_code, assert_error_messages, GET_STORE_INVENTORY_SCHEMA,
+                   PLACE_ORDER_PET_SCHEMA, update_keys, get_random_existing_id)
+from data import OrderPetsData
 
 def test_get_store_inventory(order_api):
     response = order_api.get_store_inventory()
     assert_status_code(response, 200)
-    assert_data_schema(response, order_schemas.GET_STORE_INVENTORY_SCHEMA)
+    assert_data_schema(response, GET_STORE_INVENTORY_SCHEMA)
 
 def test_get_store_inventory_with_invalid_api_key(order_api):
     response = order_api.get_store_inventory(api_key="invalid_api_key")
@@ -48,7 +47,7 @@ def test_get_order(order_api ,pet_api):
     response = order_api.get_pet_order(order_id)
     assert_status_code(response, 200)
     assert response.json().get("id") == order_id
-    assert_data_schema(response, order_schemas.PLACE_ORDER_PET_SCHEMA)
+    assert_data_schema(response, PLACE_ORDER_PET_SCHEMA)
 
 def test_get_order_with_invalid_api_key(order_api, pet_api):
     pet_id = get_random_existing_id(pet_api.get_pet, 100)

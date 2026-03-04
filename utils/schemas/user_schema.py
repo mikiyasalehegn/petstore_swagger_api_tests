@@ -12,13 +12,3 @@ GET_USER_SCHEMA = {
     },
     "required": ["id", "username", "firstName", "lastName", "email", "phone", "userStatus"]
 }
-
-
-
-
-
-
-
-
-
-
