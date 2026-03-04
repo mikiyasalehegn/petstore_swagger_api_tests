@@ -127,12 +127,21 @@ def test_login_with_invalid_api_key(user_api):
     assert_status_code(response, 401)
     assert_error_messages(response, "Invalid api key")
 
+def test_delete_user(user_api):
+    username = UsrData.CREATE_USER_WITH_VALID_DATA["username"]
+    response = user_api.delete_user(user_name=username)
+    assert_status_code(response, 200)
+    response = user_api.get_user(user_name=username)
+    assert_status_code(response, 404)
 
+def test_delete_non_existing_user(user_api):
+    username = UsrData.RANDOM_USER_NAME
+    response = user_api.delete_user(user_name=username)
+    assert_status_code(response, 404)
+    assert_error_messages(response, "User does not exist")
 
-
-
-
-
-
-
-
+def test_delete_user_with_invalid_api_key(user_api):
+    username = UsrData.CREATE_USERS_WITH_VALID_DATA[1]
+    response = user_api.delete_user(user_name=username)
+    assert_status_code(response, 401)
+    assert_error_messages(response, "Invalid api key")
