@@ -16,3 +16,6 @@ class UserApi:
 
     def delete_user(self, user_name, api_key=None):
         return self.api_client.delete(f"/user/{user_name}", api_key=api_key)
+
+    def login(self, username, password, api_key=None):
+        return self.api_client.get(f"/user/login?username={username}&password={password}", api_key=api_key)

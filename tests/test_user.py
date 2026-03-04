@@ -90,6 +90,35 @@ def test_update_user_with_invalid_email(user_api):
     response = user_api.update_user(user_name=username, payload={"email": email})
     assert_status_code(response, 400)
 
+def test_login_user(user_api):
+    username = UsrData.CREATE_USER_WITH_VALID_DATA["username"]
+    password = UsrData.CREATE_USER_WITH_VALID_DATA["password"]
+    response = user_api.login(username=username, password=password)
+    assert_status_code(response, 200)
+
+def test_login_user_with_wrong_password(user_api):
+    username = UsrData.CREATE_USER_WITH_VALID_DATA["username"]
+    password = UsrData.CREATE_USER_WITH_INVALID_DATA["password"]
+    response = user_api.login(username=username, password=password)
+    assert_status_code(response, 401)
+    assert_error_messages(response, "Wrong password")
+
+def test_login_user_with_invalid_username(user_api):
+    username = UsrData.RANDOM_USER_NAME
+    password = UsrData.CREATE_USER_WITH_VALID_DATA["password"]
+    response = user_api.login(username=username, password=password)
+    assert_status_code(response, 401)
+    assert_error_messages(response, "User does not exist")
+
+def test_login_user_with_invalid_password_and_username(user_api):
+    username = UsrData.RANDOM_USER_NAME
+    password = UsrData.RANDOM_USER_PASSWORD
+    response = user_api.login(username=username, password=password)
+    assert_status_code(response, 400)
+    assert_error_messages(response, "Wrong password and username")
+
+
+
 
 
 
