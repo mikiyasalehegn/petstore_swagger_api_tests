@@ -1,4 +1,4 @@
-get_pet_schema = {
+GET_PET_SCHEMA = {
     "type": "object",
     "properties": {
         "id": {"type": "integer"},
@@ -8,7 +8,7 @@ get_pet_schema = {
     "required": ["id", "name", "status"]
 }
 
-error_message = {
+ERROR_MESSAGE = {
   "type": "object",
   "properties": {
       "code": "integer",
@@ -18,7 +18,7 @@ error_message = {
   "required": ["code", "message"]
 }
 
-create_pet_schema = {
+CREATE_PET_SCHEMA = {
     "type": "object",
     "properties": {
         "id": {"type": "integer"},
