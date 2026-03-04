@@ -24,6 +24,7 @@ def poll(timeout=40, interval=1):
     return decorator
 
 def update_keys(data, **kwargs):
+    data = data.copy()
     for key in kwargs:
         data[key] = kwargs[key]
     return data

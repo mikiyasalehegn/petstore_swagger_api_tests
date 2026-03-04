@@ -1,4 +1,5 @@
 from utils.utility_functions import random_string
+import random
 import datetime
 
 
@@ -130,6 +131,15 @@ class OrderPetsData:
     }
 
 class UsrData:
+    RANDOM_USER_NAME = random_string(12)
+    RANDOM_USER_EMAIL = random_string(8) + "@gmail.com"
+    RANDOM_FIRST_NAME = random_string(12)
+    RANDOM_LAST_NAME = random_string(12)
+    RANDOM_USER_PASSWORD = random_string(6) + str(random.randint(1, 8))
+    RANDOM_USER_PHONE = str(random.randint(1, 10))
+    INVALID_USER_EMAIL = random_string(8)
+
+
     CREATE_USERS_WITH_VALID_DATA = [
       {
         "username": "User01",
@@ -150,4 +160,69 @@ class UsrData:
         "userStatus": 1
       }
     ]
+
+    CREATE_USERS_WITH_DUPLICATED_VALID_DATA = [
+      {
+        "username": "user03",
+        "firstName": "User3",
+        "lastName": "Three",
+        "email": "user03@gmail.com",
+        "password": "user333",
+        "phone": "0765429867",
+        "userStatus": 0
+      },
+      {
+        "username": "user03",
+        "firstName": "User3",
+        "lastName": "Three",
+        "email": "user03@gmail.com",
+        "password": "user333",
+        "phone": "0765429867",
+        "userStatus": 0
+      }
+    ]
+
+    CREATE_USERS_WITH_INVALID_DATA = [
+      {
+        "username": 234,
+        "firstName": 9349,
+        "lastName": True,
+        "email": 8090,
+        "password": 98826,
+        "phone": False,
+        "userStatus": "one"
+      },
+      {
+        "username": 9087,
+        "firstName": False,
+        "lastName": True,
+        "email": "8090",
+        "password": 98826,
+        "phone": False,
+        "userStatus": "Zero"
+      }
+    ]
+
+    CREATE_USER_WITH_VALID_DATA = {
+        "username": "User And",
+        "firstName": "User First Name",
+        "lastName": "User Last Name",
+        "email": "userand@gmail.com",
+        "password": "userand11122",
+        "phone": "09123456",
+        "userStatus": 1
+      }
+
+    CREATE_USER_WITH_INVALID_DATA = {
+        "username": 34,
+        "firstName": False,
+        "lastName": True,
+        "email": "useran",
+        "password": 345,
+        "phone": "dfgbfgn",
+        "userStatus": [3]
+    }
+
+
+
 
