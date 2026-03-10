@@ -68,7 +68,7 @@ def test_get_pet_with_invalid_api_key(pet_api):
 def test_update_pet_with_valid_data(pet_api):
     get_response = pet_api.get_pet(10)
     assert_status_code(get_response, 200)
-    assert_data_schema(get_response, GET_PET_SCHEMA.get_pet_schema)
+    assert_data_schema(get_response, GET_PET_SCHEMA)
     pet_name = get_response.json().get("name")
     payload = update_keys(PetsData.Update_PET_WITH_VALID_DATA, key="id", value=10)
     update_response = pet_api.update_pet(payload)
